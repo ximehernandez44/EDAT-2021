@@ -6,6 +6,7 @@
 package jerarquicas;
 
 import lineales.dinamicas.Lista;
+import lineales.dinamicas.Cola;
 
 /**
  *
@@ -95,7 +96,7 @@ public class ArbolBin {
 
     private int alturaAux(NodoArbol nodo) {
         int izq = 0, der = 0, res = 0;
-        if (esHoja(nodo)) {
+        if (!esHoja(nodo)) {
             izq = alturaAux(nodo.getIzquierdo()) + 1;
             der = alturaAux(nodo.getDerecho()) + 1;
 
@@ -126,11 +127,11 @@ public class ArbolBin {
 
     public int nivelAux(Object elem, NodoArbol n) {
         int res = -1;
-        
+
         if (n != null) {
             if (n.getElem().equals(elem)) {
                 res = 0;
-                
+
             } else {
                 res = nivelAux(elem, n.getIzquierdo());
                 //si no lo encuentra en el hijo izquierdo, busca en el der
@@ -204,26 +205,45 @@ public class ArbolBin {
     public Lista listarPosorden() {
         //devuelve una lista con los elementos en recorrido posorden
     }*/
-    
     public Lista listarNiveles() {
         //devuelve una lista con los elementos en recorrido por niveles
+        Cola q = new Cola();
+        Lista res = new Lista();
+        NodoArbol nodoActual;
+
+        if (this.raiz != null) {
+            q.poner(this.raiz);
+
+            while (!q.esVacia()) {
+                nodoActual = (NodoArbol) q.obtenerFrente();
+                q.sacar();
+                res.insertar(nodoActual.getElem(), res.longitud() + 1);
+
+                if (nodoActual.getIzquierdo() != null) {
+                    q.poner(nodoActual.getIzquierdo());
+                    if (nodoActual.getDerecho() != null) {
+                        q.poner(nodoActual.getDerecho());
+                    }
+                }
+            }
+        }
+        return res;
     }
-    
+
     /*public ArbolBin clone() {
         //devuelve un clon
     }
     
-    */
+     */
     public void vaciar() {
         //Quita todos los elementos de la estructura
         this.raiz = null;
     }
-    
+
     /*public String toString() {
         //Devuelve una cadena de caracteres que indica cual es la raiz
         //del arbol y quienes son los hijos de cada nodo
     }*/
-    
     private boolean esHoja(NodoArbol nodo) {
         return nodo.getDerecho() == null && nodo.getIzquierdo() == null;
     }

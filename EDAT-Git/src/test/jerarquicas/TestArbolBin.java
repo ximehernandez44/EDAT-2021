@@ -9,70 +9,58 @@ import jerarquicas.ArbolBin;
 public class TestArbolBin {
 
     public static void main(String[] args) {
-        ArbolBin arbol1 = new ArbolBin();
+        ArbolBin arbol = new ArbolBin();
 
-        System.out.println("COMIENZA TEST **************************************");
-        //PRUEBA INSERTAR
-        System.out.println("PRUEBA INSERTAR");
-        System.out.println(arbol1.insertar('A', 'A', 'I') ? "Bien" : "Mal");
-        System.out.println(arbol1.insertar('B', 'A', 'I') ? "Bien" : "Mal");
-        System.out.println(arbol1.insertar('C', 'A', 'D') ? "Bien" : "Mal");
-        System.out.println(arbol1.insertar('D', 'B', 'I') ? "Bien" : "Mal");
-        System.out.println(arbol1.insertar('E', 'B', 'D') ? "Bien" : "Mal");
+        System.out.println("--------- Inserta elementos --------------");
+        System.out.println(arbol.insertar('A', 'A', 'I') ? "Ok" : "Err");
+        System.out.println(arbol.insertar('B', 'A', 'I') ? "Ok" : "Err");
+        System.out.println(arbol.insertar('C', 'A', 'D') ? "Ok" : "Er");
+        System.out.println(arbol.insertar('D', 'B', 'I') ? "Ok" : "Err");
+        System.out.println(arbol.insertar('E', 'B', 'D') ? "Ok" : "Er");
 
-        /*
-                    A
+        /*          A
                    / \
                   B   C
                  / \
                 D   E
          */
-        System.out.println("PRUEBA ES VACIA");
-        //PRUEBA ES VACIO
-        System.out.println(arbol1.esVacio());
-        System.out.println("");
-
-        /*System.out.println("PRUEBA TO STRING");
-        //PRUEBA TO STRING 
-        System.out.println(arbol1.toString());
-        System.out.println("");*/
-
-        System.out.println("PRUEBA LISTAR PRE ORDEN");
-        //PRUEBA LISTAR PRE ORDEN
-        System.out.println(arbol1.listarPreorden().toString());
-        System.out.println("");
         
-        System.out.println("PRUEBA ALTURA");
-        //PRUEBA ALTURA
-        System.out.println(arbol1.altura());
-        System.out.println("");
-        
-        /*System.out.println("PRUEBA LISTAR IN ORDEN");
-        //PRUEBA LISTAR IN ORDEN
-        System.out.println(arbol1.listarInOrden());
-        System.out.println("");
+        System.out.println("\n----------Arbol es vacio?-----------");
+        System.out.println(arbol.esVacio());
 
-        System.out.println("PRUEBA LISTAR POS ORDEN");
-        //PRUEBA LISTAR POS ORDEN
-        System.out.println(arbol1.listarPosOrden());
-        System.out.println("");
+        /*System.out.println("\n-------- Muestra como String -----);
+        System.out.println(arbol.toString());*/
 
-        */System.out.println("PRUEBA PADRE ELEMENTO EXISTENTE");
-        //PRUEBA LISTAR POS ORDEN
-        System.out.println(arbol1.padre('C'));
-        System.out.println("");
+        System.out.println("\n-------- Lista en Preorden --------");
+        System.out.println(arbol.listarPreorden().toString());
+        
+        
+        /*System.out.println("\n--------- Lista en Inorden ----------");
+        System.out.println(arbol.listarInorden());
 
-        System.out.println("PRUEBA PADRE ELEMENTO NO EXISTENTE");
-        //PRUEBA LISTAR POS ORDEN
-        System.out.println(arbol1.padre('Z'));
-        System.out.println("");
+        System.out.println("\n----------- Lista en Posorden ---------");
+        System.out.println(arbol.listarPosorden());
+        */
         
-        System.out.println("PRUEBA DE NIVEL DE ELEMENTO EXISTENTE");
-        System.out.println(arbol1.nivel('A'));
-        System.out.println("");
+        System.out.println("\n------- Lista por niveles --------");
+        System.out.println(arbol.listarNiveles());
         
-        System.out.println("PRUEBA DE NIVEL DE ELEMENTO NO EXISTENTE");
-        System.out.println(arbol1.nivel('X'));
-        System.out.println("");
+        System.out.println("\n---------- Muestra altura -----------");
+        System.out.println(arbol.altura());
+
+        System.out.println("\n-- Solicita padre de elemento existente (C) --");
+        System.out.println("Espera 'A': " +arbol.padre('C'));
+
+        System.out.println("\n-- Solicita padre de elemento no existente --");
+        System.out.println(arbol.padre('Z'));
+        
+        System.out.println("\n---------- Muestra el nivel de la raiz -----------");
+        System.out.println("Espera 0: " +arbol.nivel('A'));
+        
+        System.out.println("\n---------- Muestra el nivel de D -----------");
+        System.out.println("Espera 2: " +arbol.nivel('D'));
+        
+        System.out.println("\n--- Muestra el nivel de un elem inexistente ---");
+        System.out.println(arbol.nivel('X'));
     }
 }
