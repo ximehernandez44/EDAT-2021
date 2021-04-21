@@ -95,7 +95,7 @@ public class ArbolBin {
     }
 
     private int alturaAux(NodoArbol nodo) {
-        int izq = 0, der = 0, res = 0;
+        int izq, der, res = 0;
         if (!esHoja(nodo)) {
             izq = alturaAux(nodo.getIzquierdo()) + 1;
             der = alturaAux(nodo.getDerecho()) + 1;
@@ -113,7 +113,7 @@ public class ArbolBin {
     public int nivel(Object elem) {
         //Devuelve el nivel de elem en el arbol.
         //Si no existe devuelve -1
-        int nivel = -1;
+        int nivel;
 
         if (elem == this.raiz.getElem()) {
             nivel = 0;
@@ -149,7 +149,7 @@ public class ArbolBin {
 
     public Object padre(Object elem) {
         //devuelve el valor almacenado en su nodo padre
-        Object padre = null;
+        Object padre;
 
         if (elem == this.raiz.getElem()) {
             padre = this.raiz.getElem();
@@ -198,13 +198,35 @@ public class ArbolBin {
         }
     }
 
-    /*public Lista listarInorden() {
+    public Lista listarInorden() {
         //devuelve una lista con los elementos en recorrido inorden
+        Lista lis = new Lista();
+        listarInordenAux(this.raiz, lis);
+        return lis;
     }
-    
+
+    private void listarInordenAux(NodoArbol nodo, Lista lis) {
+        if (nodo != null) {
+            listarInordenAux(nodo.getIzquierdo(), lis);
+            lis.insertar(nodo.getElem(), lis.longitud() + 1);
+            listarInordenAux(nodo.getDerecho(), lis);
+        }
+    }
+
     public Lista listarPosorden() {
         //devuelve una lista con los elementos en recorrido posorden
-    }*/
+        Lista lis = new Lista();
+        listarPosordenAux(this.raiz, lis);
+        return lis;
+    }
+    
+    private void listarPosordenAux(NodoArbol nodo, Lista lis) {
+        if (nodo != null) {
+            listarPosordenAux(nodo.getIzquierdo(), lis);
+            listarPosordenAux(nodo.getDerecho(), lis);
+            lis.insertar(nodo.getElem(), lis.longitud() + 1);
+        }
+    }
     
     public Lista listarNiveles() {
         //devuelve una lista con los elementos en recorrido por niveles
@@ -273,9 +295,14 @@ public class ArbolBin {
         }
         return cad;
     }
-           
 
+    //---------------------- Extras ---------------------------
+    
     private boolean esHoja(NodoArbol nodo) {
         return nodo.getDerecho() == null && nodo.getIzquierdo() == null;
     }
+
+    /*frontera() que devuelve una lista con la frontera del árbol. Se dene frontera
+de un árbol, la secuencia formada por los elementos almacenados en las hojas del árbol, tomadas de
+izquierda a derecha.*/
 }

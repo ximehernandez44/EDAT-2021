@@ -35,12 +35,11 @@ public class TestArbolBin {
         System.out.println(arbol.listarPreorden().toString());
         
         
-        /*System.out.println("\n--------- Lista en Inorden ----------");
+        System.out.println("\n--------- Lista en Inorden ----------");
         System.out.println(arbol.listarInorden());
 
         System.out.println("\n----------- Lista en Posorden ---------");
         System.out.println(arbol.listarPosorden());
-        */
         
         System.out.println("\n------- Lista por niveles --------");
         System.out.println(arbol.listarNiveles());
