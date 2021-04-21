@@ -10,7 +10,7 @@ import lineales.dinamicas.Cola;
 
 /**
  *
- * @author ximeh
+ * @author ximehernandez
  */
 public class ArbolBin {
 
@@ -205,6 +205,7 @@ public class ArbolBin {
     public Lista listarPosorden() {
         //devuelve una lista con los elementos en recorrido posorden
     }*/
+    
     public Lista listarNiveles() {
         //devuelve una lista con los elementos en recorrido por niveles
         Cola q = new Cola();
@@ -240,10 +241,40 @@ public class ArbolBin {
         this.raiz = null;
     }
 
-    /*public String toString() {
+    @Override
+    public String toString() {
         //Devuelve una cadena de caracteres que indica cual es la raiz
-        //del arbol y quienes son los hijos de cada nodo
-    }*/
+        //del arbol y quienes son los hijos de cada nodo        
+        String cad;
+        if (this.raiz == null) {
+            cad = "Arbol vacio";
+        } else {
+            cad = toStringAux(this.raiz, "");
+        }
+        return cad;
+    }
+
+    private String toStringAux(NodoArbol nodo, String cad) {
+        if (nodo != null) {
+            if (esHoja(nodo)) {
+                //no tiene hijos
+                cad += "\n" + nodo.getElem() + "     HI: -     HD: -";
+            } else {
+                if (nodo.getIzquierdo() == null) {
+                    //si no tiene hijo izquierdo pero no es hoja, entonces solo tiene hijo derecho
+                    cad += "\n" + nodo.getElem() + "     HI: -    HD: " + nodo.getDerecho().getElem();
+                } else {
+                    //tiene ambos hijos
+                    cad += "\n" + nodo.getElem() + "     HI: " + nodo.getIzquierdo().getElem() + "     HD: " + nodo.getDerecho().getElem();
+                }
+                cad = toStringAux(nodo.getIzquierdo(), cad);
+                cad = toStringAux(nodo.getDerecho(), cad);
+            }
+        }
+        return cad;
+    }
+           
+
     private boolean esHoja(NodoArbol nodo) {
         return nodo.getDerecho() == null && nodo.getIzquierdo() == null;
     }

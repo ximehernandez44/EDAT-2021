@@ -28,8 +28,8 @@ public class TestArbolBin {
         System.out.println("\n----------Arbol es vacio?-----------");
         System.out.println(arbol.esVacio());
 
-        /*System.out.println("\n-------- Muestra como String -----);
-        System.out.println(arbol.toString());*/
+        System.out.println("\n-------- Muestra como String -----");
+        System.out.println(arbol.toString());
 
         System.out.println("\n-------- Lista en Preorden --------");
         System.out.println(arbol.listarPreorden().toString());
