@@ -19,7 +19,7 @@ public class Cola {
         this.fin = null;
     }
 
-    /* mio public boolean poner(Object nuevoElem) {
+    public boolean poner(Object nuevoElem) {
         //crea un nuevo nodo
         Nodo nuevo = new Nodo(nuevoElem, null);
 
@@ -33,18 +33,6 @@ public class Cola {
             //apunta fin al nodo nuevo
             this.fin = nuevo;
         }
-        return true;
-    } */
-    
-    public boolean poner(Object elemento) {
-        //Pone un elemento en la cola
-        Nodo otroNodo = new Nodo(elemento, null);
-        if (esVacia()) {
-            this.frente = otroNodo;
-        } else {
-            this.fin.setEnlace(otroNodo);
-        }
-        this.fin = otroNodo;
         return true;
     }
     

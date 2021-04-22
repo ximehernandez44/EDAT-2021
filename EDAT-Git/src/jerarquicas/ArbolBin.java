@@ -10,7 +10,7 @@ import lineales.dinamicas.Cola;
 
 /**
  *
- * @author ximehernandez
+ * @author Xime Hernandez
  */
 public class ArbolBin {
 
@@ -161,6 +161,7 @@ public class ArbolBin {
     }
 
     public Object padreAux(Object elem, NodoArbol n) {
+        //CAMBIAR LOS == POR EQUALS
         Object padre = null;
         if (esHoja(n) || padre != null) {
             //listo
@@ -253,11 +254,32 @@ public class ArbolBin {
         return res;
     }
 
-    /*public ArbolBin clone() {
+    public ArbolBin clone() {
         //devuelve un clon
+        ArbolBin clon = null;
+        if (this.raiz != null) {
+            clon.raiz = cloneAux(this.raiz);
+        }
+        
+        return clon;
     }
     
-     */
+    private NodoArbol cloneAux(NodoArbol n) {
+        NodoArbol nuevo = null;
+        
+        if (n != null) {
+            nuevo = new NodoArbol(n.getElem());
+        if (n.getIzquierdo() != null) {
+            nuevo.setIzquierdo(cloneAux(n.getIzquierdo()));
+        }
+        if (n.getDerecho() != null) {
+            nuevo.setDerecho(cloneAux(n.getDerecho()));
+        }
+        }
+        return nuevo;
+    }
+    
+     
     public void vaciar() {
         //Quita todos los elementos de la estructura
         this.raiz = null;
@@ -296,7 +318,7 @@ public class ArbolBin {
         return cad;
     }
 
-    //---------------------- Extras ---------------------------
+    //---------------------- EXTRAS ---------------------------
     
     private boolean esHoja(NodoArbol nodo) {
         return nodo.getDerecho() == null && nodo.getIzquierdo() == null;

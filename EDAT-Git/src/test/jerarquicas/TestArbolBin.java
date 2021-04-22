@@ -30,10 +30,11 @@ public class TestArbolBin {
 
         System.out.println("\n-------- Muestra como String -----");
         System.out.println(arbol.toString());
+        
 
+        
         System.out.println("\n-------- Lista en Preorden --------");
         System.out.println(arbol.listarPreorden().toString());
-        
         
         System.out.println("\n--------- Lista en Inorden ----------");
         System.out.println(arbol.listarInorden());
@@ -44,14 +45,21 @@ public class TestArbolBin {
         System.out.println("\n------- Lista por niveles --------");
         System.out.println(arbol.listarNiveles());
         
+        
+        
+        
         System.out.println("\n---------- Muestra altura -----------");
         System.out.println(arbol.altura());
+        
 
         System.out.println("\n-- Solicita padre de elemento existente (C) --");
         System.out.println("Espera 'A': " +arbol.padre('C'));
 
         System.out.println("\n-- Solicita padre de elemento no existente --");
         System.out.println(arbol.padre('Z'));
+        
+        
+        
         
         System.out.println("\n---------- Muestra el nivel de la raiz -----------");
         System.out.println("Espera 0: " +arbol.nivel('A'));
