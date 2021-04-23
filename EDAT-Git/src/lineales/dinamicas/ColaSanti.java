@@ -7,7 +7,7 @@ package lineales.dinamicas;
 
 /**
  *
- * @author Santiago B
+ * @author Santiago Briceño, Ximena Hernandez
  */
 public class ColaSanti {
 
@@ -20,6 +20,8 @@ public class ColaSanti {
     }
     
     public boolean poner(Object elem){
+        //pone un elemento al final de la cola
+        
         boolean exito = true;
         Nodo nuevoNodo = new Nodo(elem, null);
         
@@ -34,6 +36,8 @@ public class ColaSanti {
     }
     
     public boolean sacar(){
+        //saca un elemento del frente de la cola
+        
         boolean exito = true;
         
         if(this.esVacia()){
@@ -49,19 +53,30 @@ public class ColaSanti {
     }
     
     public boolean esVacia(){
+        //indica si la cola es vacia
        return (this.frente == null);
     }
     
     public Object obtenerFrente(){
-        return this.frente.getElem();
+        //devuelve el objeto que esta en tope, es null si esta vacia
+        Object s;
+        if (esVacia()) {
+            s = null;
+        } else {
+            s = this.frente.getElem();
+        }
+        return s;
     }
     
     public void vaciar(){
+        //vacia la cola
         this.frente = null;
         this.fin = null;
     }
     
     public String toString(){
+        //devuelve la cola como string
+        
         String salida;
         Nodo auxFrente = this.frente;
         if(!this.esVacia()){
@@ -81,6 +96,8 @@ public class ColaSanti {
     }
     
     public ColaSanti clone(){
+        //devuelve una copia de la cola original
+        
         ColaSanti clon = new ColaSanti();
         Nodo nodoAux1, nodoAux2;
         
@@ -101,26 +118,4 @@ public class ColaSanti {
         return clon;
     }
     
-    /* public Pila clone() {
-        //Este metodo se diseño en base a la clase de consulta
-        //se usa un aux1 el cual iterará desde el segundo nodo, hasta el ultimo.
-        //se usa un aux2 el cual se creará apartir del valor del elemento del nodo aux1, el cual luego de esto, se enlazara con el elemento anterior de la pila.
-        
-        Pila Clon = new Pila();
-        Nodo aux1, nodoClon, aux2;
-
-        if (!this.esVacia()) {
-            nodoClon = new Nodo(this.tope.getElem(), null);           
-            Clon.tope = nodoClon;                                  
-            aux1 = this.tope.getEnlace();                  
-            while (aux1 != null) {                        
-                aux2 = new Nodo(aux1.getElem(), null);   
-                nodoClon.setEnlace(aux2);
-                nodoClon = nodoClon.getEnlace();
-                aux1 = aux1.getEnlace();
-            }
-        }
-        return Clon;
-    }
-    */
 }

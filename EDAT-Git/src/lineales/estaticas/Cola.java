@@ -7,7 +7,7 @@ package lineales.estaticas;
 
 /**
  *
- * @author ximeh
+ * @author Santiago Briceño, Ximena Hernandez
  */
 public class Cola {
 
@@ -63,14 +63,6 @@ public class Cola {
         return (this.frente == this.fin);
     }
 
-    /*public void vaciar() {
-        //Saca todos los elementos de la estructura
-        for (int i = frente; i <= fin; i = (i+1) % TAMANIO) {
-            this.arreglo[i] = 0;            
-        }
-        frente = 0;
-        fin = 0;
-    }*/
     public void vaciar() {
         //Saca todos los elementos de la estructura
         while (arreglo[frente] != null) {

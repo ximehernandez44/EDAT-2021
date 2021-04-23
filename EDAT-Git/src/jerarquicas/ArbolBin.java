@@ -96,7 +96,7 @@ public class ArbolBin {
 
     private int alturaAux(NodoArbol nodo) {
         int izq, der, res = 0;
-        if (!esHoja(nodo)) {
+        if (!esHoja(nodo) && nodo != null) {
             izq = alturaAux(nodo.getIzquierdo()) + 1;
             der = alturaAux(nodo.getDerecho()) + 1;
 
@@ -113,12 +113,14 @@ public class ArbolBin {
     public int nivel(Object elem) {
         //Devuelve el nivel de elem en el arbol.
         //Si no existe devuelve -1
-        int nivel;
-
+        int nivel = -1;
+        
+        if (this.raiz != null) {
         if (elem == this.raiz.getElem()) {
             nivel = 0;
         } else {
             nivel = nivelAux(elem, this.raiz);
+        }
         }
 
         return nivel;
@@ -147,35 +149,38 @@ public class ArbolBin {
 
     }
 
+    
     public Object padre(Object elem) {
-        //devuelve el valor almacenado en su nodo padre
-        Object padre;
-
+        Object padre = null;
+        
+        if (this.raiz != null) {
         if (elem == this.raiz.getElem()) {
             padre = this.raiz.getElem();
         } else {
-            padre = padreAux(elem, this.raiz);
+            if (obtenerNodo(this.raiz, elem) != null) {
+                padre = auxPadre(this.raiz, elem).getElem();
+            }
         }
-
+        }
         return padre;
     }
 
-    public Object padreAux(Object elem, NodoArbol n) {
-        //CAMBIAR LOS == POR EQUALS
-        Object padre = null;
-        if (esHoja(n) || padre != null) {
-            //listo
-        } else {
-            if (n.getDerecho().getElem() == elem || n.getIzquierdo().getElem() == elem) {
-                padre = n.getElem();
-            } else {
-                padre = padreAux(elem, n.getDerecho());
-                if (padre == null) {
-                    padre = padreAux(elem, n.getIzquierdo());
-                }
+    private NodoArbol auxPadre(NodoArbol n, Object hijo) {
+        NodoArbol resultado = null;
+        // caso base, si la raiz es hoja o hijo derecho es igual a buscado o hijo izquierdo es igual a buscado 
+        if (n != null && n.getDerecho() != null) {
+        if (esHoja(n) || n.getDerecho().getElem() == hijo || n.getIzquierdo().getElem() == hijo) {
+            resultado = n;
+        } else { // si no
+
+            resultado = auxPadre(n.getIzquierdo(), hijo); //busca en hijo izquierdo 
+            if (resultado != null) {
+                resultado = auxPadre(n.getDerecho(), hijo);
             }
         }
-        return padre;
+        }
+
+        return resultado;
     }
 
     /*------------------ LISTAR --------------------*/
@@ -229,7 +234,7 @@ public class ArbolBin {
         }
     }
     
-    public Lista listarNiveles() {
+    public Lista listarPorNiveles() {
         //devuelve una lista con los elementos en recorrido por niveles
         Cola q = new Cola();
         Lista res = new Lista();
@@ -256,7 +261,7 @@ public class ArbolBin {
 
     public ArbolBin clone() {
         //devuelve un clon
-        ArbolBin clon = null;
+        ArbolBin clon = new ArbolBin();
         if (this.raiz != null) {
             clon.raiz = cloneAux(this.raiz);
         }
@@ -300,19 +305,23 @@ public class ArbolBin {
 
     private String toStringAux(NodoArbol nodo, String cad) {
         if (nodo != null) {
-            if (esHoja(nodo)) {
-                //no tiene hijos
-                cad += "\n" + nodo.getElem() + "     HI: -     HD: -";
+            if (nodo.getIzquierdo() != null) {
+            //si existe el hijo izquierdo, lo agrega a la cadena
+                    cad += "\n" + nodo.getElem() + "     HI: " + nodo.getIzquierdo().getElem();
             } else {
-                if (nodo.getIzquierdo() == null) {
-                    //si no tiene hijo izquierdo pero no es hoja, entonces solo tiene hijo derecho
-                    cad += "\n" + nodo.getElem() + "     HI: -    HD: " + nodo.getDerecho().getElem();
-                } else {
-                    //tiene ambos hijos
-                    cad += "\n" + nodo.getElem() + "     HI: " + nodo.getIzquierdo().getElem() + "     HD: " + nodo.getDerecho().getElem();
-                }
-                cad = toStringAux(nodo.getIzquierdo(), cad);
-                cad = toStringAux(nodo.getDerecho(), cad);
+                    cad += "\n" + nodo.getElem() + "     HI: - ";
+            }
+            if (nodo.getDerecho() != null) {
+                    cad += "     HD: " + nodo.getDerecho().getElem();
+            } else {
+                cad += "      HD:  - ";
+            }
+            
+            if (nodo.getIzquierdo() != null) {
+            cad = toStringAux(nodo.getIzquierdo(), cad);
+            }
+            if (nodo.getDerecho() != null) {
+            cad = toStringAux(nodo.getDerecho(), cad);
             }
         }
         return cad;
@@ -321,7 +330,11 @@ public class ArbolBin {
     //---------------------- EXTRAS ---------------------------
     
     private boolean esHoja(NodoArbol nodo) {
-        return nodo.getDerecho() == null && nodo.getIzquierdo() == null;
+        boolean exito = false;
+        if (nodo != null) {
+            exito = (nodo.getDerecho() == null && nodo.getIzquierdo() == null);
+        }
+        return exito;
     }
 
     /*frontera() que devuelve una lista con la frontera del árbol. Se dene frontera

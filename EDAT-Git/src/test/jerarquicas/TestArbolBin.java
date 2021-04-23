@@ -43,7 +43,7 @@ public class TestArbolBin {
         System.out.println(arbol.listarPosorden());
         
         System.out.println("\n------- Lista por niveles --------");
-        System.out.println(arbol.listarNiveles());
+        System.out.println(arbol.listarPorNiveles());
         
         
         

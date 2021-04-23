@@ -7,7 +7,7 @@ package jerarquicas;
 
 /**
  *
- * @author ximeh
+ * @author Santiago Bricenio, Ximena Hernandez
  */
 public class NodoArbol {
     Object elem;

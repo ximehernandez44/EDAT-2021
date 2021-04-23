@@ -26,13 +26,13 @@ public class Cola {
         //si la cola esta vacia, frente apunta al nodo nuevo
         if (this.frente == null) {
             this.frente = nuevo;
-            this.fin = nuevo;
         } else {
             //conecta el nodo nuevo al ultimo
             this.fin.setEnlace(nuevo);
             //apunta fin al nodo nuevo
-            this.fin = nuevo;
         }
+            this.fin = nuevo;
+            
         return true;
     }
     
@@ -76,7 +76,6 @@ public class Cola {
 
     @Override
     public Cola clone() {
-
         Cola colaClon = new Cola();
         
         if (!this.esVacia()) {
