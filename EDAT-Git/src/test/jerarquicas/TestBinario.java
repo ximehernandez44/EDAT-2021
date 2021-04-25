@@ -163,14 +163,14 @@ public class TestBinario {
         System.out.println("\n\n");
         System.out.println(ANSI_YELLOW_BACKGROUND + "----------------------------------------------------------------------------------------------------------"
                 + "----------------------------------------------------------------------------------------" + RESET);
-        /*System.out.println("\n\n********************************");
+        System.out.println("\n\n********************************");
         System.out.println("*   Test de Busqueda de Padre  *");
         System.out.println("********************************\n");
         System.out.println("Busco al padre de 3. Tiene que dar 9: " + sOk + " --> " + (((int) a.padre(3) == 9) ? sOk : sErr));
         System.out.println("Busco al padre de 20. Tiene que dar 15: " + sOk + " --> " + (((int) a.padre(20) == 15) ? sOk : sErr));
         System.out.println("Busco al padre de raiz. Tiene que dar null: " + sOk + " --> " + ((a.padre(10) == null) ? sOk : sErr));
         System.out.println("Busco al padre de elemento inexistente. Tiene que dar null: " + sErr + " --> " + ((a.padre(1011) != null) ? sOk : sErr));
-*/
+
         System.out.println("\n\n");
         System.out.println(ANSI_YELLOW_BACKGROUND + "----------------------------------------------------------------------------------------------------------"
                 + "----------------------------------------------------------------------------------------" + RESET);
@@ -203,7 +203,7 @@ public class TestBinario {
         System.out.println("\n\n**********************************");
         System.out.println("*      Test de FRONTERA          *");
         System.out.println("**********************************\n");
-        /* System.out.println("Frontera de original.\n Tiene que dar: [ 7 - 10 - 12 - 20 ]  " + a.frontera().toString());
+        System.out.println("Frontera de original.\n Tiene que dar: [ 7 - 10 - 12 - 20 ]  " + a.frontera().toString());
         System.out.println("");
         System.out.println("Inserto el 40 como hijo D de 12 " + ((a.insertar(40, 12, 'D')) ? sOk : sErr));
         System.out.println("");
@@ -213,7 +213,7 @@ public class TestBinario {
         System.out.println("");
         System.out.println("Inserto el 50 en el clon " + ((b.insertar(50, null, 'D')) ? sOk : sErr));
         System.out.println("");
-        System.out.println("Frontera de clon con solo raiz.\n Tiene que dar: [ 50 ]  " + b.frontera().toString()); */
+        System.out.println("Frontera de clon con solo raiz.\n Tiene que dar: [ 50 ]  " + b.frontera().toString());
     }
 
 }

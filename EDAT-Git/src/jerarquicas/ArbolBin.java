@@ -150,7 +150,7 @@ public class ArbolBin {
     }
 
     
-    public Object padre(Object elem) {
+    /*public Object padre(Object elem) {
         Object padre = null;
         
         if (this.raiz != null) {
@@ -180,6 +180,43 @@ public class ArbolBin {
         }
         }
 
+        return resultado;
+    }*/
+    
+    public Object padre(Object elemento) {
+        Object resultado;
+        resultado = null;   // En caso de que el elemento a buscar sea el elemento raiz retorna null
+        if(this.raiz != null){
+            if(!this.raiz.getElem().equals(elemento)){   // Si el elemento buscado no está en la raíz lo busca
+                resultado = padreAux(this.raiz, elemento);
+            }
+        }
+        return resultado;
+    }
+    private Object padreAux(NodoArbol nodo, Object buscado){
+        // Metodo privado recursivo porque recibe un nodo de la estructura. Ademas recibe un elemento de tipo Object del cual
+        // debe buscar su elemento padre en la estructura.
+        // Zona de declaracion de variables
+        Object resultado;
+        NodoArbol nodoIzq, nodoDer;
+        // Zona de inicializacion de variable
+        resultado = null;
+
+        if(nodo != null){
+           nodoIzq = nodo.getIzquierdo();
+           nodoDer = nodo.getDerecho();
+
+           if(nodoIzq != null && nodoIzq.getElem().equals(buscado) || nodoDer != null && nodoDer.getElem().equals(buscado)){
+               // Si encontro el elemento buscado en el nodo hijo izquierdo o en el derecho, retorna el elemento padre
+               resultado = nodo.getElem();
+           }else{
+               // Sino, busca por los hijos de la izquierda
+               resultado = padreAux(nodoIzq, buscado);
+               if(resultado == null){   // Si no tiene mas hijos izquierdos por recorrer, busca hacia la derecha
+                   resultado = padreAux(nodoDer, buscado);
+               }
+           }
+        }
         return resultado;
     }
 
@@ -336,8 +373,26 @@ public class ArbolBin {
         }
         return exito;
     }
+    
+    public Lista frontera() {
+        Lista lis = new Lista();
+        auxFrontera(this.raiz, lis);
+        return lis;
+    }
 
-    /*frontera() que devuelve una lista con la frontera del árbol. Se dene frontera
-de un árbol, la secuencia formada por los elementos almacenados en las hojas del árbol, tomadas de
-izquierda a derecha.*/
+    private void auxFrontera(NodoArbol n, Lista lis) {
+        NodoArbol nodoIzq;
+        NodoArbol nodoDer;
+
+        if (n != null) {
+            nodoIzq = n.getIzquierdo();
+            nodoDer = n.getDerecho();
+            if (nodoIzq == null && nodoDer == null) {
+                lis.insertar(n.getElem(), lis.longitud() + 1);
+            } else {
+                auxFrontera(nodoIzq, lis);
+                auxFrontera(nodoDer, lis);
+            }
+        }
+    }
 }
