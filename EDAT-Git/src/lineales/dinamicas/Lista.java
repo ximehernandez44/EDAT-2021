@@ -287,7 +287,7 @@ varias veces en cualquier posición.*/
                 if (aux.getElem().equals(x)) {
                     this.cabecera = this.cabecera.getEnlace();
                 } else {
-                    if (aux.getEnlace().getElem().equals(x)) {
+                    if ((aux.getEnlace() != null) && aux.getEnlace().getElem().equals(x)) {
                         aux.setEnlace(aux.getEnlace().getEnlace());
                      
                     }                    
