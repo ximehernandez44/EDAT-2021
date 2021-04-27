@@ -211,7 +211,7 @@ public class Lista {
 haciendo un único recorrido de la estructura y sin usar otras operaciones del TDA. Ej: si L1=[1,2,1,3,4]
 debe devolver [2,3,4]. En los casos de prueba considere que el elemento a eliminar puede estar repetido
 varias veces en cualquier posición.*/
-    public boolean eliminarApariciones(Object x) {
+ /*public boolean eliminarApariciones(Object x) {
         int pos = 1;
         Nodo aux1 = this.cabecera;
         Nodo aux2 = this.cabecera;
@@ -241,5 +241,60 @@ varias veces en cualquier posición.*/
 
         }
         return exito;
+    }*/
+    public void preCargar(Object[] arreglo) {
+        //recibe un arreglo y lo carga en la lista
+
+        for (int i = 0; i < arreglo.length; i++) {
+
+            this.insertar(arreglo[i], i + 1);
+        }
     }
+
+    public Lista obtenerMultiplos(int num) {
+        int i = 1;
+        Lista lis = new Lista();
+        boolean primera = false;
+
+        if (!esVacia()) {
+            Nodo copia = null;
+            Nodo nuevo;
+            Nodo aux = this.cabecera;
+
+            while (aux != null) {
+                if ((i % num) == 0) {
+                    nuevo = new Nodo(aux.getElem(), null);
+                    if (!primera) {
+                        primera = true;
+                        lis.cabecera = nuevo;
+                        copia = new Nodo(aux.getElem(), null);
+                    }
+                    copia.setEnlace(nuevo);
+                    copia = copia.getEnlace();
+                }
+                aux = aux.getEnlace();
+                i++;
+            }
+        }
+        return lis;
+    }
+
+    public void eliminarApariciones(Object x) {
+        Nodo aux = this.cabecera;
+
+        if (!esVacia()) {
+            while (aux != null) {
+                if (aux.getElem().equals(x)) {
+                    this.cabecera = this.cabecera.getEnlace();
+                } else {
+                    if (aux.getEnlace().getElem().equals(x)) {
+                        aux.setEnlace(aux.getEnlace().getEnlace());
+                     
+                    }                    
+                }
+                aux = aux.getEnlace();
+            }
+        }
+    }
+
 }

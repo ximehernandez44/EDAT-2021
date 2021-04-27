@@ -13,6 +13,7 @@ public class TestLista {
     public static void main (String [] args) {
         Lista lista = new Lista();
         Lista clon = new Lista();
+        Object[] arr = {1,2,3,4,5 ,6};
         
         System.out.println("//////////////////////// INT ///////////////////////////////");
         System.out.println("\nPongo 3, 5, 7");
@@ -66,7 +67,29 @@ public class TestLista {
         clon.insertar(7, 4);
         System.out.println(clon.toString());
         
-        System.out.println("\n---------------Elimino los 3------------------------------");
+        /*System.out.println("\n---------------Elimino los 3------------------------------");
+        clon.eliminarApariciones(3);
+        System.out.println(clon.toString());*/
+     
+        System.out.println("\n-------------Muestro multiplos de 1 del clon--------------------");
+        System.out.println(clon.obtenerMultiplos(1).toString());
+        
+        System.out.println("\n-----Inserto [1,2,3,4,5,6] en el original-----------");
+        lista.preCargar(arr);
+        System.out.println(lista.toString());
+        
+        System.out.println("\n---------Muestro multiplos de 2 del original----------");
+        System.out.println(lista.obtenerMultiplos(3).toString());
+     
+        System.out.println("\n---------Muestro el clon----------------");
+        System.out.println(clon.toString());
+        
+        System.out.println("\n-------Inserto otro [3,7]------------------");
+        clon.insertar(3, 3);
+        clon.insertar(7, 4);
+        System.out.println(clon.toString());
+        
+        System.out.println("\n-------------Elimino los 3----------------");
         clon.eliminarApariciones(3);
         System.out.println(clon.toString());
         
