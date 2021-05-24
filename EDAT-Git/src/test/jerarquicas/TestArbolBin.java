@@ -5,11 +5,14 @@
  */
 package test.jerarquicas;
 import jerarquicas.ArbolBin;
+import lineales.dinamicas.Lista;
 
 public class TestArbolBin {
 
     public static void main(String[] args) {
         ArbolBin arbol = new ArbolBin();
+        ArbolBin arbol2 = new ArbolBin();
+        Lista patron = new Lista();
 
         System.out.println("--------- Inserta elementos --------------");
         System.out.println(arbol.insertar('A', 'A', 'I') ? "Ok" : "Err");
@@ -69,5 +72,41 @@ public class TestArbolBin {
         
         System.out.println("\n--- Muestra el nivel de un elem inexistente ---");
         System.out.println(arbol.nivel('X'));
+        
+        System.out.println("\n----------Cargo la lista-----------");
+        patron.insertar('A', 1);
+        patron.insertar('B', 2);
+        patron.insertar('D', 3);
+        System.out.println(patron.toString());
+        
+        System.out.println("\n------Compruebo el patron---------");
+        System.out.println(arbol.verificarPatron(patron));
+        
+        /*Ejemplo: si en el árbol de la izquierda recibe los elementos pp=63, hi=50, hd=96, 
+        debe buscar el primer nodo que tenga elemento igual a 63, cambiar el elemento 87 por 96 
+        (sin tocar a sus hijos) y agregarle el hijo izquierdo 50*/
+        /* yo hago: pp= B, hi = F, hd = G*/
+        
+        System.out.println("\n----------Metodo alterar parte---------");
+        System.out.println("El arbol inicial es: " +arbol.toString());
+        System.out.println("PP = B, Hi = F, hd = G");
+        arbol.alterarParte('F', 'G', 'B');
+        System.out.println("El arbol resultante es: " +arbol.toString());
+        
+        System.out.println("\n----------Inserta los numeros a ArbolBin2-------");
+        System.out.println(arbol2.insertar(45, 45, 'I') ? "Ok" : "Err");
+        System.out.println(arbol2.insertar(32, 45, 'I') ? "Ok" : "Err");
+        System.out.println(arbol2.insertar(63, 45, 'D') ? "Ok" : "Er");
+        System.out.println(arbol2.insertar(3, 32, 'I') ? "Ok" : "Err");
+        System.out.println(arbol2.insertar(5, 32, 'D') ? "Ok" : "Er");
+        System.out.println(arbol2.insertar(87, 63, 'D') ? "Ok" : "Err");
+        System.out.println(arbol2.insertar(20, 87, 'I') ? "Ok" : "Er");
+        System.out.println(arbol2.toString());
+        
+        System.out.println("\n--------Metodo alterar parte------");
+        System.out.println("Pp = 63, Hi = 50, Hd = 96");
+        arbol2.alterarParte(50, 96, 63);
+        System.out.println("El arbol resultante es: " +arbol2.toString());
+
     }
 }

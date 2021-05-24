@@ -14,6 +14,7 @@ public class TestLista {
         Lista lista = new Lista();
         Lista clon = new Lista();
         Object[] arr = {1,2,3,4,5 ,6};
+        Object[] arr2 = {'A','G','T','B','G','S','G','N'};
         
         System.out.println("//////////////////////// INT ///////////////////////////////");
         System.out.println("\nPongo 3, 5, 7");
@@ -93,5 +94,15 @@ public class TestLista {
         clon.eliminarApariciones(3);
         System.out.println(clon.toString());
         
+        //[A,G,T,B,G,S,G,N], elem1=G y elem2=X, la lista debe quedar: [A,G,X,T,B,G,X,S,G,X,N]
+        System.out.println("\n------------Vacio y agrego elem a la lista original-------");
+        lista.vaciar();
+        lista.preCargar(arr2);
+        System.out.println(lista.toString());
+        
+        System.out.println("\n-----Agrego el elemento X despues de la G------");
+        
+        System.out.println("Se pudo realizar? " +lista.insertarPosSiguiente('G', 'X'));
+        System.out.println("La lista nueva es: " +lista.toString());
     }
 }

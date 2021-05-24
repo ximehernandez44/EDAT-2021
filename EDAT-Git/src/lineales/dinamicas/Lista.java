@@ -289,12 +289,33 @@ varias veces en cualquier posición.*/
                 } else {
                     if ((aux.getEnlace() != null) && aux.getEnlace().getElem().equals(x)) {
                         aux.setEnlace(aux.getEnlace().getEnlace());
-                     
-                    }                    
+
+                    }
                 }
                 aux = aux.getEnlace();
             }
         }
+    }
+
+    public boolean insertarPosSiguiente(Object elem1, Object elem2) {
+        boolean exito = false;
+
+        if (this.cabecera != null) {
+            Nodo aux = this.cabecera;
+            if (this.cabecera.equals(elem1)) {
+                Nodo cabecera = new Nodo(elem2, this.cabecera);
+                this.cabecera = cabecera;
+            }
+            while (aux != null) {
+                if (aux.getElem().equals(elem1)) {
+                    Nodo nuevo = new Nodo(elem2, aux.getEnlace());
+                    aux.setEnlace(nuevo);
+                }
+                aux = aux.getEnlace();
+            }
+            exito = true;
+        }
+        return exito;
     }
 
 }
