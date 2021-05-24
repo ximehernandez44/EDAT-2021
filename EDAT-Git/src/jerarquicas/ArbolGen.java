@@ -178,7 +178,103 @@ public class ArbolGen {
         }
         return encontrado;
     }
-    
+    ////////NIVEL SANTI//////////
+    /*public int nivel(Object elem) {
+        return nivelAux(this.raiz, elem);
+    }
+
+    private int nivelAux(NodoGen nodo, Object elem) {
+        int nivel = -1;
+        
+        if (nodo != null) {
+            if (nodo.getElem().equals(elem)) {
+                nivel = 0;
+            } else {
+                nivel = nivelAux(nodo.getHermanoDerecho(), elem);
+                if (nivel == -1) {
+                    nivel = nivelAux(nodo.getHijoIzquierdo(), elem) + 1;
+                }
+            }
+        }
+        return nivel;
+    }*/
+    //////NIVEL MIO/////////
+    /*public int nivel(Object elem) {
+        //devuelve el nivel de un elemento en el arbol. Si no esta devuelve -1
+        int nivel = -1;
+
+        if (this.raiz != null) {
+            if (elem == this.raiz.getElem()) {
+                nivel = 0;
+            } else {
+                //nivel = nivelAux(elem, this.raiz);
+            }
+        }
+        return nivel;
+    }*/
+
+ /*public int nivelAux(Object elem, NodoGen n) {
+        int res = -1;
+
+        if (n != null) {
+            if (n.getElem().equals(elem)) {
+                res = 0;
+            } else {
+                NodoGen hijoIzq = n.getHijoIzquierdo();
+                res = nivelAux(elem, hijoIzq);
+                //si no lo encuentra en el hijo izquierdo, busca en los hermanos derechos
+                if (res == -1) {
+                    res = nivelAux(elem, hijoIzq.getHermanoDerecho());
+                }
+                if (res != -1) {
+                    res++;
+                }
+            }
+        }
+        return res;
+    }*/
+    ///////PADRE MIO/////////
+    /*public Object padre(Object elem) {
+        Object ret;
+        if (esVacio()) {
+            ret = null; 
+        } else {
+            ret = padreAux(this.raiz, elem);
+        }
+        return ret;
+    }
+
+    private Object padreAux(NodoGen nodo, Object elem) {
+        Object padre = null;
+        NodoGen hijo;
+
+        if (nodo != null && nodo.getHijoIzquierdo() != null) {
+            if (this.raiz.getElem().equals(elem)) {
+                //si la raiz es el elemento, no tiene padre y termina
+                padre = null;
+                
+            } else {
+                hijo = nodo.getHijoIzquierdo();
+                while (hijo != null && padre == null) { //mientras el hijo exista y no se haya encontrado el padre
+                    if (hijo.getElem().equals(elem)) {
+                        padre = nodo.getElem();
+                    }
+                    hijo = hijo.getHermanoDerecho();
+                }
+
+                //si no se encuentra, se llama a los hijos
+                if (padre == null) {
+                    hijo = nodo.getHijoIzquierdo();
+                    while (padre == null && hijo != null) {
+                        padre = padreAux(hijo, elem);
+                        hijo = hijo.getHermanoDerecho();
+                    }
+                }
+            }
+        }
+        return padre;
+    }*/
+    /////////////PADRE SANTI////////////////7
     public Object padre(Object hijo) {
         //devuelve el padre del elemento ingresado
         
