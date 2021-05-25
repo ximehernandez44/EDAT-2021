@@ -27,7 +27,7 @@ public class ArbolBB {
             // Reportar error: Elemento repetido
             exito = false;
         } else if (elemento.compareTo(n.getElem()) < 0) {
-            // elemento es menor quen.getElem()
+            // elemento es menor que.getElem()
             // si tiene HI baja a la izquierda, sino agrega elemento
             if (n.getIzquierdo() != null) {
                 exito = insertarAux(n.getIzquierdo(), elemento);
@@ -50,6 +50,46 @@ public class ArbolBB {
         // Recibe un elemento que se desea eliminar y se procede a removerlo.
         // Devuelve verdadero si el elemento se encuentra y falso en caso contrario
         boolean exito = false;
+        NodoABB n = this.raiz;
+        NodoABB nodoElem;
+        NodoABB padre = this.raiz;
+
+        while (!encontrado && n != null) {
+            if (elemento.compareTo(n) == 0) {
+                // el elemento es igual
+                exito = true;
+                nodoElem = n;
+            } else {
+                if (elemento.compareTo(n.getElem()) < 0) {
+                    // el elemento es menor a n, continua por el subarbol izquierdo
+                    padre = n;
+                    n = n.getIzquierdo();
+                } else {
+                    //el elemento es mayor a n, continua por el subarbol derecho
+                    padre = n;
+                    n = n.getDerecho();
+                }
+            }
+        }
+
+        if (exito) {
+        //si es hoja
+        //si tiene un hijo
+        //si tiene ambos hijos
+
+        if (nodoElem.getIzquierdo() != null || nodoElem.getDerecho() != null) {
+            //tiene al menos un hijo
+            if (nodoElem.getIzquierdo () == null || nodoElem.getDerecho() == null) {
+                //tiene solo un hijo
+            } else {
+                //tiene los dos hijos
+            }
+        } else {
+            //es hoja
+            if (nodoElem.getElem().compareTo(padre.getElem()) < 0) {
+
+            }
+        }
 
         return exito;
     }
@@ -58,7 +98,21 @@ public class ArbolBB {
         // Devuelve verdadero si el elemento recibido por parametro esta en el arbol
         // y falso en caso contrario
         boolean exito = false;
-
+        NodoABB n = this.raiz;
+        while (n != null && exito == false) {
+            if (elemento.compareTo(n) == 0) {
+                // el elemento es igual
+                exito = true;
+            } else {
+                if (elemento.compareTo(n.getElem()) < 0) {
+                    // el elemento es menor a n, continua por el subarbol izquierdo
+                    n = n.getIzquierdo();
+                } else {
+                    //el elemento es mayor a n, continua por el subarbol derecho
+                    n = n.getDerecho();
+                }
+            }
+        }
         return exito;
     }
 
@@ -88,25 +142,40 @@ public class ArbolBB {
 
     public Lista listarRango(Comparable elemMinimo, Comparable elemMaximo) {
         // recorre parte del arbol y devuelve una lista ordenada con los elementos que
-        // se encuentran
-        // en el intervalo [elemMinimo, elemMaximo]
+        // se encuentran en el intervalo [elemMinimo, elemMaximo]
         Lista lis = new Lista();
-
+        listarRangoAux(this.raiz, elemMinimo, elemMaximo,lis);
         return lis;
+    }
+
+    private void listarRangoAux(NodoABB nodo, Comparable elemMinimo, Comparable elemMaximo, Lista lis) {
+        //busca el elem minimo y guarda todos los elementos en inorden 
+        //hasta que llega al elem maximo
+        if (nodo != null && ((elemMinimo.compareTo(nodo.getElem())) < 0) || (elemMaximo.compareTo(nodo.getElem())> 0)) {
+            listarRangoAux(nodo.getIzquierdo(), elemMinimo, elemMaximo, lis);
+            lis.insertar(nodo.getElem(), lis.longitud() + 1);
+            listarRangoAux(nodo.getDerecho(), elemMinimo, elemMaximo, lis);
+        }
     }
 
     public Object minimoElem() {
         // devuelve el elemento mas pequenio almacenado
-        Object ret = null;
+        NodoABB ret = this.raiz;
 
-        return ret;
+        while (ret.getIzquierdo() != null) {
+            ret = ret.getIzquierdo();
+        }
+        return ret.getElem();
     }
 
     public Object maximoElem() {
         // devuelve el elemento mas grande almacenado
-        Object ret = null;
+        NodoABB ret = this.raiz;
 
-        return ret;
+        while (ret.getDerecho() != null) {
+            ret = ret.getDerecho();
+        }
+        return ret.getElem();
     }
 
     public ArbolBB clone() {
