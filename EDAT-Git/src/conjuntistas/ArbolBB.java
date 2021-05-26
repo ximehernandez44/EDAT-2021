@@ -46,15 +46,15 @@ public class ArbolBB {
         return exito;
     }
 
-    public boolean eliminar(Comparable elemento) {
+   public boolean eliminar(Comparable elemento) {
         // Recibe un elemento que se desea eliminar y se procede a removerlo.
         // Devuelve verdadero si el elemento se encuentra y falso en caso contrario
         boolean exito = false;
         NodoABB n = this.raiz;
-        NodoABB nodoElem;
+        NodoABB nodoElem = this.raiz;
         NodoABB padre = this.raiz;
 
-        while (!encontrado && n != null) {
+        while (!exito && n != null) {
             if (elemento.compareTo(n) == 0) {
                 // el elemento es igual
                 exito = true;
@@ -73,25 +73,85 @@ public class ArbolBB {
         }
 
         if (exito) {
-        //si es hoja
-        //si tiene un hijo
-        //si tiene ambos hijos
-
-        if (nodoElem.getIzquierdo() != null || nodoElem.getDerecho() != null) {
-            //tiene al menos un hijo
-            if (nodoElem.getIzquierdo () == null || nodoElem.getDerecho() == null) {
-                //tiene solo un hijo
+            if (nodoElem.getIzquierdo() == null && nodoElem.getDerecho() == null) {
+                //no tiene hijos, es  hoja
+                caso1(nodoElem, padre);
             } else {
-                //tiene los dos hijos
-            }
-        } else {
-            //es hoja
-            if (nodoElem.getElem().compareTo(padre.getElem()) < 0) {
-
+                if (nodoElem.getIzquierdo() != null && nodoElem.getDerecho() == null) {
+                    //tiene solo un hijo izquierdo
+                    caso2(nodoElem, padre, 'I');
+                } else {
+                    if (nodoElem.getIzquierdo() == null && nodoElem.getDerecho() != null) {
+                        //tiene solo un hijo derecho
+                        caso2(nodoElem, padre, 'D');
+                    } else {
+                        //tiene ambos hijos
+                        caso3(nodoElem);
+                    }
+                }
             }
         }
 
         return exito;
+    }
+
+    private void caso1(NodoABB elem, NodoABB padre) {
+
+        if (elem.getElem().compareTo(padre.getElem()) < 0) {
+            //el hijo es menor que el padre, es hijo izquierdo
+            padre.setIzquierdo(null);
+        } else {
+            //el hijo es mayor que el padre, es hijo derecho
+            padre.setDerecho(null);
+        }
+    }
+
+    private void caso2(NodoABB elem, NodoABB padre, char pos) {
+
+        if (elem.getElem().compareTo(padre.getElem()) < 0) {
+            //el hijo es menor que el padre, es hijo izquierdo
+            if (pos == 'I') {
+                padre.setIzquierdo(elem.getIzquierdo());
+            } else {
+                padre.setIzquierdo(elem.getDerecho());
+            }
+        } else {
+            //el hijo es mayor que el padre, es hijo derecho
+            if (pos == 'I') {
+                padre.setDerecho(elem.getIzquierdo());
+            } else {
+                padre.setDerecho(elem.getDerecho());
+            }
+        }
+    }
+
+    private void caso3(NodoABB elem) {
+        NodoABB candidatoA = elem.getIzquierdo();
+        NodoABB padre = elem.getIzquierdo();
+
+        //candidato A: se baja al hijo izquierdo de N, y se mueve por enlaces
+        //a la derecha hasta encontrar el nodo que no tenga hijo derecho
+        while (candidatoA.getDerecho() != null) {
+            padre = candidatoA;
+            candidatoA = candidatoA.getDerecho();
+        }
+
+        //se cambia el valor del nodo de elem con ese valor encontrado
+        elem.setElem(candidatoA.getElem());
+
+        //se elimina el nodo hijo con caso 1 o 2
+        if (candidatoA.getIzquierdo() == null && candidatoA.getDerecho() == null) {
+            //no tiene hijos, es  hoja
+            caso1(candidatoA, padre);
+        } else {
+            if (candidatoA.getIzquierdo() != null && candidatoA.getDerecho() == null) {
+                //tiene solo un hijo izquierdo
+                caso2(candidatoA, padre, 'I');
+            } else {
+                //tiene solo un hijo derecho
+                caso2(candidatoA, padre, 'D');
+            }
+        }
     }
 
     public boolean pertenece(Comparable elemento) {
