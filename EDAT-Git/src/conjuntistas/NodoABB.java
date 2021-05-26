@@ -1,21 +1,21 @@
 package conjuntistas;
 
 public class NodoABB {
-    private Object elem; //es Object o Comparable?
+    private Comparable elem;
     private NodoABB izquierdo;
     private NodoABB derecho;
 
-    public NodoABB (Object elem, NodoABB izq, NodoABB der) {
+    public NodoABB (Comparable elem, NodoABB izq, NodoABB der) {
         this.elem = elem;
         this.izquierdo = izq;
         this.derecho = der;
     }
 
-    public NodoABB(Object elem) {
+    public NodoABB(Comparable elem) {
         this.elem = elem;
     }
 
-    public Object getElem() {
+    public Comparable getElem() {
         return elem;
     }
     public NodoABB getIzquierdo() {
@@ -24,7 +24,7 @@ public class NodoABB {
     public NodoABB getDerecho() {
         return derecho;
     }
-    public void setElem(Object elem) {
+    public void setElem(Comparable elem) {
         this.elem = elem;
     }
     public void setIzquierdo(NodoABB izq) {
