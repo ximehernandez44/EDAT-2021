@@ -523,4 +523,36 @@ public class ArbolGen {
         }
         return s;
     }
+    public Lista listarEntreNiveles(int niv1, int niv2) {
+        /*
+         * Recibe como parámetro dos elementos niv1 y niv2 y devuelve una lista con los
+         * elementos del árbol que están entre los niveles niv1 y niv2 inclusive.
+         */
+        Lista lis = new Lista();
+        if (!esVacio()) {
+            listarEntreNivelesAux(this.raiz, niv1, niv2, lis, 0);
+        }
+        return lis;
+    }
+
+    private void listarEntreNivelesAux(NodoGen nodo, int niv1, int niv2, Lista lis, int nivActual) {
+        if (nodo != null) {
+            // Llamado recursivo con primer llamado de nodo.
+            if (nodo.getHijoIzquierdo() != null) {
+                listarEntreNivelesAux(nodo.getHijoIzquierdo(), niv1, niv2, lis, nivActual++);
+            }
+            // Visita del nodo.
+            if (nivActual >= niv1 && nivActual <= niv2) {
+                lis.insertar(nodo.getElem(), lis.longitud() + 1);
+            }
+            // Llamados recursivos con los otros hijos de nodo.
+            if (nodo.getHijoIzquierdo() != null) {
+                NodoGen hijo = nodo.getHijoIzquierdo().getHermanoDerecho();
+                while (hijo != null) {
+                    listarEntreNivelesAux(hijo, niv1, niv2, lis, nivActual++);
+                    hijo = hijo.getHermanoDerecho();
+                }
+            }
+        }
+    }
 }
