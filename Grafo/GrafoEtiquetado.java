@@ -33,6 +33,18 @@ public boolean existeVertice(Object vertice) {
 public boolean existeArco(Object origen, Object destino) {
     //Dado dos elementos de TipoVertice (origen y destino), devuelve verdadero si existe un arco que los une y falos en caso contrario.
 }
+
+public boolean esVacio() {
+
+}
+
+
+public String toString() {
+    //genera y devuelve una cadena String que muestra los vértices almacenados en el grafo y qué adyacentes tiene cada uno de ellos.
+}
+
+}
+
 /*
 public boolean existeCamino(Object origen, Object destino) {
     //Dado dos elementos de TipoVertice (origen y destino) devuelve verdadero si existe al menos un camino que permite llegar del vertice origen al vertie destino
@@ -60,16 +72,7 @@ public Lista listarEnAnchura() {
     //devuelve una lista con los vertices del grafo visitados segun el recorrido en anchura
 } */
 
-public boolean esVacio() {
-
-}
 /*
 public Grafo clone() {
     //genera y devuelve un grafo que es equivalente al original
 } */
-
-public String toString() {
-    //genera y devuelve una cadena String que muestra los vértices almacenados en el grafo y qué adyacentes tiene cada uno de ellos.
-}
-
-}
