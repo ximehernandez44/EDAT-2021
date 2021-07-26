@@ -11,7 +11,7 @@ public GrafoEtiquetado() {
 }
 
 public boolean insertarVertice(Object vertice) {
-    //Dado un elemento de tipo Object se lo agrega a la estructura
+    //Dado un elemento de tipo Object se lo agrega a la estructura HOla
 }
 
 public boolean eliminarVertice(Object vertice) {
