@@ -7,7 +7,7 @@ public class GrafoEtiquetado {
 
 //constructores
 public GrafoEtiquetado() {
-
+NodoVert inicio;
 }
 
 public boolean insertarVertice(Object vertice) {
